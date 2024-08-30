@@ -27,6 +27,57 @@ git clone https://github.com/your-repo-name.git
 cd your-repo-name/terraform
 ```
 
+This repository contains all the Terraform configuration files necessary for deploying the infrastructure.
+
+## Step 2: Initialize Terraform
+Initialize Terraform to download the necessary providers and set up the backend for storing the Terraform state:
+
+`terraform init`
+
+This command will configure your local environment with the required Terraform modules and providers.
+
+## Step 3: Review and Modify Configuration
+Before deploying, review the Terraform configuration files to ensure they meet your requirements. You might want to modify certain values such as the VPC CIDR block, instance types, or database configurations.
+
+The key files to review include:
+
+vpc.tf: Contains the VPC and subnet configurations.
+ecs.tf: Defines the ECS cluster and task definitions.
+rds.tf: Manages the RDS MySQL database.
+security_groups.tf: Configures security groups for network traffic.
+iam.tf: Sets up IAM roles and policies.
+autoscaling.tf: Configures auto-scaling policies.
+secrets.tf: Manages sensitive data using AWS Secrets Manager.
+
+## Step 4: Deploy the Infrastructure
+To deploy the entire infrastructure, run the following commands:
+
+Plan the Deployment:
+
+`terraform plan`
+
+This command shows you the resources that Terraform will create, modify, or destroy.
+
+Apply the Configuration:
+
+`terraform apply`
+
+After reviewing the plan, confirm the changes. Terraform will start creating the infrastructure as defined in your .tf files.
+
+## Step 5: Verify the Deployment
+Once the Terraform execution is complete, verify the deployment:
+
+ECS Cluster: Check that the ECS cluster and services (frontend and backend) are running as expected.
+RDS Database: Verify the RDS instance is running in the private subnet and accessible only by the backend service.
+Networking and Security: Ensure that the security groups are configured correctly, allowing the required communication between services.
+Scaling: Confirm that the auto-scaling policies are in place and that CloudWatch is monitoring the services.
+
+## Step 6: Clean Up Resources
+To clean up the resources created by Terraform (if no longer needed), run:
+
+`terraform destroy`
+This command will tear down all the resources created during the terraform apply step. Make sure you review the plan before confirming the destruction.
+
 # Output
 
 ![image](https://github.com/user-attachments/assets/46f54bfb-1ae2-4e85-8dd2-e1f0856ff841)
